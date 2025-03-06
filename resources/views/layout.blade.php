@@ -26,6 +26,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/contact">Contacts</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/article">Articles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/article/create">Create Articles</a>
+            </li>
           </ul>
         </div>
         <div class="navbar-nav d-flex justify-content-end">

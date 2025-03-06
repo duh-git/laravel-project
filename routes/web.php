@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use Database\Seeders\ArticleSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +39,13 @@ Route::get('/contact', function () {
   return view('main/contact', ['contact' => $contact]);
 });
 
+
 Route::get('/register', [AuthController::class, 'create']);
 Route::post('/auth/login', [AuthController::class, 'registration']);
+
+Route::resource('article', ArticleController::class);
+// Route::group(['prefix' => '/article'], function () {
+//   Route::get('', [ArticleController::class, 'index']);
+//   Route::get('/create', [ArticleController::class, 'create']);
+//   Route::get('/store', [ArticleController::class, 'store']);
+// });
