@@ -12,5 +12,8 @@
       <button class="btn btn-link" type="submit">Delete</button>
     </form>
     </div>
+    <div class="container">
+    @include('comments.comments')
+    </div>
   </div>
 @endsection

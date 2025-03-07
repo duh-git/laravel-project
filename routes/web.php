@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MainController;
 use Database\Seeders\ArticleSeeder;
 use Illuminate\Support\Facades\Route;
@@ -44,10 +45,20 @@ Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'loginHandler']);
 Route::get('/auth/logout', [AuthController::class, 'logout']);
 
-// Article
+// Articles
 Route::resource('article', ArticleController::class)->middleware('auth:sanctum');
 // Route::group(['prefix' => '/article'], function () {
 //   Route::get('', [ArticleController::class, 'index']);
 //   Route::get('/create', [ArticleController::class, 'create']);
 //   Route::get('/store', [ArticleController::class, 'store']);
 // });
+
+// Comments
+Route::post('/article/{article}/comments', [CommentController::class, 'store'])
+  ->name('articles.comments.store');
+Route::get('comments/{comment}/edit', [CommentController::class, 'edit'])
+  ->name('comments.edit');
+Route::patch('comments/{comment}', [CommentController::class, 'update'])
+  ->name('comments.update');
+Route::delete('comments/{comment}', [CommentController::class, 'destroy'])
+  ->name('comments.destroy');

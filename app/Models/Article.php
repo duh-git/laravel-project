@@ -10,4 +10,9 @@ class Article extends Model
   use HasFactory;
   protected $guarded = ['id'];
   // protected $fillable = ['title', 'datePublic', 'desc', 'shortDesc'];
+
+  public function comments()
+  {
+    return $this->hasMany(Comment::class);
+  }
 }
