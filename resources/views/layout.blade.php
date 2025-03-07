@@ -35,8 +35,13 @@
           </ul>
         </div>
         <div class="navbar-nav d-flex justify-content-end">
-          <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
-          <li class="nav-item"><a class="nav-link" href="/auth/login">Sign In</a></li>
+          @guest
+           <li class="nav-item"><a class="nav-link" href="/auth/registration">Sign Up</a></li>
+           <li class="nav-item"><a class="nav-link" href="/auth/login">Sign In</a></li>
+          @endguest
+          @auth
+           <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
+          @endauth
         </div>
       </div>
     </nav>

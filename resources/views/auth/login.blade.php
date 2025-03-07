@@ -3,10 +3,6 @@
   <form method="post" action="/auth/login">
     @csrf
     <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input name="username" type="text" class="form-control" id="username">
-    </div>
-    <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
     <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
@@ -15,6 +11,6 @@
     <label for="password" class="form-label">Password</label>
     <input name="password" type="password" class="form-control" id="password">
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
 @endsection

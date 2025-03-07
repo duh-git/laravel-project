@@ -23,11 +23,9 @@ Route::get('/weclome', function () {
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/gallery/{id}', [MainController::class, 'show']);
-
 Route::get('/about', function () {
   return view('main/about');
 });
-
 Route::get('/contact', function () {
   $contact = [
     'name' => 'MosPolyTech',
@@ -39,11 +37,15 @@ Route::get('/contact', function () {
   return view('main/contact', ['contact' => $contact]);
 });
 
+// Auth
+Route::get('/auth/registration', [AuthController::class, 'registration']);
+Route::post('/auth/registration', [AuthController::class, 'registrationHandler']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'loginHandler']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
 
-Route::get('/register', [AuthController::class, 'create']);
-Route::post('/auth/login', [AuthController::class, 'registration']);
-
-Route::resource('article', ArticleController::class);
+// Article
+Route::resource('article', ArticleController::class)->middleware('auth:sanctum');
 // Route::group(['prefix' => '/article'], function () {
 //   Route::get('', [ArticleController::class, 'index']);
 //   Route::get('/create', [ArticleController::class, 'create']);

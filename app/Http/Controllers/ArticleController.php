@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ArticleMail;
+use App\Jobs\VeryLongJob;
 
 class ArticleController extends Controller
 {
@@ -14,6 +17,7 @@ class ArticleController extends Controller
   {
     $articles = Article::latest()->paginate(5);
     return view("articles/index", compact("articles"));
+    // return response()->json($articles, 200);
   }
 
   /**
@@ -21,6 +25,7 @@ class ArticleController extends Controller
    */
   public function create()
   {
+    $this->authorize('create', [self::class]);
     return view('articles/create');
   }
 
@@ -37,9 +42,11 @@ class ArticleController extends Controller
     ]);
 
     $article = Article::create($request->all());
+    if ($article)
+      VeryLongJob::dispatch($article);
 
     return redirect()->route('article.show', compact('article'));
-
+    // return response()->json($article, 200);
   }
 
   /**
@@ -48,6 +55,7 @@ class ArticleController extends Controller
   public function show(Article $article)
   {
     return view("articles/show", compact("article"));
+    // return response()->json($article, 200);
   }
 
   /**
@@ -55,7 +63,9 @@ class ArticleController extends Controller
    */
   public function edit(Article $article)
   {
+    $this->authorize('update', [self::class, $article]);
     return view('articles/edit', compact('article'));
+    // return response()->json($article, 200);
   }
 
   /**
@@ -73,6 +83,7 @@ class ArticleController extends Controller
     $article->update($request->all());
 
     return redirect()->route('article.show', compact('article'));
+    // return response()->json($article, 200);
   }
 
   /**
@@ -80,7 +91,9 @@ class ArticleController extends Controller
    */
   public function destroy(Article $article)
   {
+    // return response()->json($article->delete(), 201);
     $article->delete();
     return redirect()->route('article.index');
+    // return response()->json($article, 201);
   }
 }
