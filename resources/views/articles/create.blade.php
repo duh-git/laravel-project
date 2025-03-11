@@ -18,6 +18,7 @@
     <label for="desc" class="form-label">Desc</label>
     <textarea name="desc" class="form-control" id="desc"></textarea>
     </div>
+    <input name="author_id" type="text" value="{{ Auth::user()->id }}" hidden>
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 @endsection

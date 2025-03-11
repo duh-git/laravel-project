@@ -13,6 +13,7 @@ return new class extends Migration {
     Schema::create('articles', function (Blueprint $table) {
       $table->id();
       $table->date('datePublic');
+      $table->string('author_id')->nullable(false);
       $table->string('title')->nullable(false);
       $table->string('shortDesc')->nullable();
       $table->string('desc')->nullable(false);

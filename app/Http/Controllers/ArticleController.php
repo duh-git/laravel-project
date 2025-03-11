@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ArticleMail;
 use App\Jobs\VeryLongJob;
 
 class ArticleController extends Controller
@@ -25,7 +23,6 @@ class ArticleController extends Controller
    */
   public function create()
   {
-    $this->authorize('create', [self::class]);
     return view('articles/create');
   }
 
@@ -39,6 +36,7 @@ class ArticleController extends Controller
       'title' => 'required',
       'shortDesc' => 'required',
       'desc' => 'required',
+      'author_id' => 'required',
     ]);
 
     $article = Article::create($request->all());
@@ -54,7 +52,6 @@ class ArticleController extends Controller
    */
   public function show(Article $article)
   {
-
     return view('articles/show', compact('article'));
     // return response()->json($article, 200);
   }
@@ -64,6 +61,7 @@ class ArticleController extends Controller
    */
   public function edit(Article $article)
   {
+    $this->authorize('update', [Article::class, $article]);
     return view('articles/edit', compact('article'));
     // return response()->json($article, 200);
   }
@@ -73,7 +71,7 @@ class ArticleController extends Controller
    */
   public function update(Request $request, Article $article)
   {
-    $this->authorize('update', [self::class, $article]);
+    $this->authorize('update', [Article::class, $article]);
     $request->validate([
       'datePublic' => 'required',
       'title' => 'required',
@@ -93,7 +91,7 @@ class ArticleController extends Controller
   public function destroy(Article $article)
   {
     // return response()->json($article->delete(), 201);
-    $this->authorize('delete', [self::class, $article]);
+    $this->authorize('delete', [Article::class, $article]);
     $article->delete();
     return redirect()->route('article.index');
     // return response()->json($article, 201);

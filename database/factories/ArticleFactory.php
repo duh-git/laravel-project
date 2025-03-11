@@ -18,6 +18,7 @@ class ArticleFactory extends Factory
   {
     return [
       'datePublic' => $this->faker->date(),
+      'author_id' => $this->faker->numberBetween(1, 12),
       'title' => $this->faker->word(),
       'shortDesc' => $this->faker->sentence(),
       'desc' => $this->faker->text(),

@@ -16,11 +16,15 @@
       <small>{{ $comment->created_at }}</small>
       <p>{{ $comment->content }}</p>
     </div>
+    @can('update', $comment)
     <a href="{{ route('comments.edit', [$comment]) }}">Edit</a>
+    @endcan
+    @can('delete', $comment)
     <form action="{{ route('comments.destroy', [$comment]) }}" method="post">
       @csrf
       @method('DELETE')
       <button type="submit" class="btn btn-primary">Delete</button>
     </form>
+    @endcan
   </div>
 @endforeach

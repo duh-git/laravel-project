@@ -52,6 +52,7 @@ class CommentController extends Controller
    */
   public function edit(Comment $comment)
   {
+    $this->authorize('update', [Comment::class, $comment]);
     return view('comments.edit', compact('comment'));
   }
 
@@ -60,7 +61,7 @@ class CommentController extends Controller
    */
   public function update(Request $request, Comment $comment)
   {
-    $this->authorize('update', [self::class, $comment]);
+    $this->authorize('update', [Comment::class, $comment]);
     $request->validate([
       'content' => 'required',
     ]);
@@ -75,7 +76,7 @@ class CommentController extends Controller
    */
   public function destroy(Comment $comment)
   {
-    $this->authorize('delete', [self::class, $comment]);
+    $this->authorize('delete', [Comment::class, $comment]);
     $comment->delete();
     return redirect()->back();
   }
