@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -50,7 +51,7 @@ class AuthController extends Controller
     ];
 
     if (!Auth::attempt($credentials)) {
-      return response('Bad login or password', 401);
+      return Response('Bad login or password', 401);
     }
     // $user = User::where('email', request('email'))->first();
     // $token = $user->createToken('myAppToken');

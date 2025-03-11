@@ -10,9 +10,6 @@
 </head>
 
 <body>
-  @if($errors->any())
-    <h4>{{$errors->first()}}</h4>
-  @endif
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -41,6 +38,11 @@
         </div>
       </div>
     </nav>
+    @if($errors->any())
+    <div class="container bg-danger rounded mt-3  ">
+      <h4>{{$errors->first()}}</h4>
+    </div>
+    @endif
   </header>
 
   <main>

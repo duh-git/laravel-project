@@ -13,6 +13,7 @@
 @foreach ($article->comments as $comment)
   <div class="card mb-3">
     <div class="card-body">
+      <h5 class="card-title">{{ ucfirst(App\Models\User::findOrFail($comment->user_id)->name) }}</h5>
       <small>{{ $comment->created_at }}</small>
       <p>{{ $comment->content }}</p>
     </div>
