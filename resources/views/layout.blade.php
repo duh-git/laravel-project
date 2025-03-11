@@ -16,35 +16,28 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Main Page</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/about">About us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Contacts</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/article">Articles</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/article/create">Create Articles</a>
-            </li>
+            <li class="nav-item"><a class="nav-link {{ Route::is('gallery.index') ? 'active' : '' }}" href="{{ route('gallery.index') }}">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::is('contacts') ? 'active' : '' }}" href="{{ route('contacts') }}">Contacts</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::is('article.index') ? 'active' : '' }}" href="{{ route('article.index') }}">Articles</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::is('article.create') ? 'active' : '' }}" href="{{ route('article.create') }}">Create Article</a></li>
           </ul>
         </div>
         <div class="navbar-nav d-flex justify-content-end">
           @guest
-        <li class="nav-item"><a class="nav-link" href="/auth/registration">Sign Up</a></li>
-        <li class="nav-item"><a class="nav-link" href="/auth/login">Sign In</a></li>
-      @endguest
+          <li class="nav-item"><a class="nav-link {{ Route::is('registration') ? 'active' : '' }}" href="{{ route('registration') }}">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link {{ Route::is('login') ? 'active' : '' }}" href="{{ route('login') }}">Sign In</a></li>
+          @endguest
           @auth
-        <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
-      @endauth
+          <li class="nav-item"><a class="nav-link">Hello, {{ ucfirst(Auth::user()->name) }}!</a></li>
+          <li class="nav-item"><a class="nav-link {{ Route::is('logout') ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a></li>
+          @endauth
         </div>
       </div>
     </nav>

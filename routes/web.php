@@ -22,28 +22,28 @@ Route::get('/weclome', function () {
   return view('welcome');
 });
 
-Route::get('/', [MainController::class, 'index']);
-Route::get('/gallery/{id}', [MainController::class, 'show']);
+Route::get('/', [MainController::class, 'index'])->name('gallery.index');
+Route::get('/gallery/{id}', [MainController::class, 'show'])->name('gallery.show');
 Route::get('/about', function () {
   return view('main/about');
-});
-Route::get('/contact', function () {
-  $contact = [
+})->name('about');
+Route::get('/contacts', function () {
+  $contacts = [
     'name' => 'MosPolyTech',
     'address' => 'B. Semenovskaya',
     'phone' => '8(495) 423-32-32',
     'email' => '@mospolytech.ru'
   ];
 
-  return view('main/contact', ['contact' => $contact]);
-});
+  return view('main/contacts', ['contacts' => $contacts]);
+})->name('contacts');
 
 // Auth
-Route::get('/auth/registration', [AuthController::class, 'registration']);
+Route::get('/auth/registration', [AuthController::class, 'registration'])->name('registration');
 Route::post('/auth/registration', [AuthController::class, 'registrationHandler']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'loginHandler']);
-Route::get('/auth/logout', [AuthController::class, 'logout']);
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Articles
 Route::resource('article', ArticleController::class)->middleware('auth:sanctum');
