@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewArticleEvent;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Jobs\VeryLongJob;
@@ -40,8 +41,10 @@ class ArticleController extends Controller
     ]);
 
     $article = Article::create($request->all());
-    if ($article)
+    if ($article) {
       VeryLongJob::dispatch($article);
+      NewArticleEvent::dispatch($article);
+    }
 
     return redirect()->route('article.show', compact('article'));
     // return response()->json($article, 200);
